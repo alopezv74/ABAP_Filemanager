@@ -1,0 +1,22 @@
+<?sap.transform simple?>
+<tt:transform xmlns:tt="http://www.sap.com/transformation-templates"
+              xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+              xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+
+<tt:root name="param"/>
+
+<tt:template>
+   <sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+         <tt:attribute name="count" value-ref="param.string_count"/>
+         <tt:attribute name="uniqueCount" value-ref="param.string_ucount"/>
+         <tt:loop ref="param.t_strings" name="ss">
+            <si tt:extensible="on">
+                <t>
+                   <tt:value ref="$ss.value"/>
+                </t>
+            </si>
+         </tt:loop>
+   </sst>
+</tt:template>
+
+</tt:transform>

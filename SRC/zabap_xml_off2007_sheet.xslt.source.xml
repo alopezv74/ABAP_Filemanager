@@ -1,0 +1,65 @@
+<?sap.transform simple?>
+<tt:transform xmlns:tt="http://www.sap.com/transformation-templates" xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+
+  <tt:root name="param"/>
+
+  <tt:template>
+    <worksheet tt:extensible="on">
+
+      <dimension>
+        <tt:attribute name="ref" value-ref="param.dim"/>
+      </dimension>
+
+      <sheetViews>
+        <sheetView tt:extensible="on">
+        </sheetView>
+      </sheetViews>
+
+      <sheetFormatPr>
+        <tt:s-cond check="param.outlinelevel &gt; 0">
+          <tt:attribute name="outlineLevelRow" value-ref="param.outlinelevel"/>
+        </tt:s-cond>
+      </sheetFormatPr>
+
+      <tt:cond>
+        <cols>
+          <tt:loop name="col" ref="param.t_cols">
+            <col>
+              <tt:attribute name="min" value-ref="$col.min"/>
+              <tt:attribute name="max" value-ref="$col.max"/>
+            </col>
+          </tt:loop>
+        </cols>
+      </tt:cond>
+
+      <sheetData>
+        <!-- data -->
+        <tt:loop name="row" ref="param.t_rows">
+          <row>
+            <tt:attribute name="r" value-ref="$row.rowid"/>
+            <tt:loop name="cell" ref="$row.t_cells">
+              <c>
+                <tt:attribute name="r" value-ref="$cell.position"/>
+                <tt:cond>
+                  <tt:attribute name="t" value-ref="$cell.type"/>
+                </tt:cond>
+                <tt:deserialize>
+                  <tt:d-cond using="exist('f')">
+                    <f/>
+                  </tt:d-cond>
+                  <tt:cond>
+                    <v>
+                      <tt:value ref="$cell.value"/>
+                    </v>
+                  </tt:cond>
+                </tt:deserialize>
+              </c>
+            </tt:loop>
+          </row>
+        </tt:loop>
+      </sheetData>
+
+    </worksheet>
+  </tt:template>
+
+</tt:transform>

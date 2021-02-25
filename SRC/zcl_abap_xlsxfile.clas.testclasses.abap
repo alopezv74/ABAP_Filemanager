@@ -5,14 +5,14 @@ CLASS ltc_upload_excel DEFINITION FOR TESTING
 
   PUBLIC SECTION.
     TYPES: BEGIN OF ty_aux_folio,
-             rcdty TYPE t9cesat_auxfol-rcdty,  "Record type AccPay or HR
+             rcdty TYPE char2,                 "Record type AccPay or HR
              bukrs TYPE bkpf-bukrs,            "Company
              belnr TYPE bkpf-belnr,            "Document Number
              budat TYPE bkpf-budat,            "Posting date
              xblnr TYPE bkpf-xblnr,            "Vendor invoice number
-             uuid  TYPE t9cesat_auxfol-uuid,   "Universal Unique Identifier
-             taxid TYPE t9cesat_auxfol-taxid,  "Tax Id (RFC)
-             zwels TYPE t9cesat_auxfol-zwels,  "Payment method
+             uuid  TYPE char36,                "Universal Unique Identifier
+             taxid TYPE char13,                "Tax Id (RFC)
+             zwels TYPE char10,                "Payment method
              waers TYPE bkpf-waers,            "Currency
              wrbtr TYPE bseg-wrbtr,            "Amount
              kursf TYPE bkpf-kursf,            "Exchange rate
